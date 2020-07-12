@@ -1,0 +1,48 @@
+.mat-stepper-vertical {
+  margin-top: 5px;
+}
+
+.mat-form-field {
+  margin-top: 16px;
+  width: 70%;
+}
+
+.botao-add-atividade-1{
+  min-width: 20px;
+}
+
+mat-slider {
+  width: 100%;
+
+}
+
+td {
+  border: 1px solid #999;
+  padding: 5px;
+}
+
+table {
+  width: 100%;
+  border: 1px solid black;
+  background-color: #ffffff;
+}
+
+.geral {
+  padding: 50px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

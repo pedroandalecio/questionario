@@ -1,0 +1,509 @@
+
+<div class="geral">
+
+
+<div>
+  <img mat-card-image src="assets/inicio.png" width="100%">
+</div>
+
+
+<mat-vertical-stepper [linear]="isLinear" #stepper>
+
+
+
+  <div class="col-md-12">
+    <mat-step [stepControl]="questao1FormGroup">
+      <form [formGroup]="questao1FormGroup">
+        <ng-template matStepLabel></ng-template>
+
+        <mat-toolbar-row style="font-size:1.0rem; color:black">
+          <span>No seu momento de lazer (ou tempo livre) o que prefere fazer? Liste em ordem de preferência.</span>
+        </mat-toolbar-row>
+
+        <mat-form-field>
+            <input matInput placeholder="Informe a atividade :" formControlName="questao1Ctrl" [(ngModel)]="descricaoAtividade1">
+        </mat-form-field>
+
+      <button class="botao-add-atividade-1" style="margin-left: 5px;" mat-flat-button color="warn" (click)="addListNumero1()">+</button>
+
+        <table>
+          <tbody>
+            <th> Ordem</th>
+            <th> Atividade</th>
+            <tr *ngFor="let item of listnumero1">
+
+        <td>{{item.id}}</td>
+        <td>{{item.atividade}}</td>
+
+            </tr>
+          </tbody>
+        </table>
+
+        <div>
+          <div class="form-row"  style="margin-top: 20px;">
+            <div class="form-group col-md-6" >
+                <button mat-button matStepperNext mat-raised-button color="primary">Próxima</button>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </mat-step>
+
+  </div>
+
+
+
+  <div class="col-md-12">
+    <mat-step [stepControl]="questao2FormGroup">
+      <form [formGroup]="questao2FormGroup">
+        <ng-template matStepLabel></ng-template>
+
+        <mat-toolbar-row style="font-size:1.0rem; color:black">
+          <span>Se você tivesse 11 moedas para dividir entre todas as atividades que você citou, de acordo a importância que tem para você, como você faria essa divisão?</span>
+        </mat-toolbar-row>
+
+        <table>
+        <tbody>
+        <th>Ordem</th>
+        <th>Atividade</th>
+        <th>Moedas</th>
+
+        <tr *ngFor="let item of listnumero2">
+
+        <td style="width:25%">{{item.id}}</td>
+        <td style="width:50%">{{item.atividade}}</td>
+
+        <td style="width:25%">
+                {{item.moedas}}
+          <mat-slider thumbLabel (change)="updateListNumero2($event, item.id)"
+                           [displayWith]="formatLabel"
+                           tickInterval="1000"
+                           min="0"
+                           max="11"
+                           value="{{item.moedas}}"
+                           [vertical]="false">
+                          </mat-slider>
+         </td>
+
+            </tr>
+          </tbody>
+        </table>
+
+        <div>
+          <div class="form-row"  style="margin-top: 20px;">
+            <div class="form-group col-md-6" >
+                <button mat-button matStepperPrevious mat-raised-button color="accent">Anterior</button>
+                <button style="margin-left: 5px;" mat-button matStepperNext mat-raised-button color="primary">Próxima</button>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </mat-step>
+
+  </div>
+
+
+
+
+
+
+  <div class="col-md-12">
+  <mat-step [stepControl]="questao3FormGroup">
+    <form [formGroup]="questao3FormGroup">
+      <ng-template matStepLabel></ng-template>
+
+      <mat-toolbar-row style="font-size:1.0rem; color:black">
+        <span>Considere a importância que as atividades abaixo têm para você no seu tempo de lazer e em cada situação distribua 11 moedas entre as atividades 1 e 2.</span>
+      </mat-toolbar-row>
+
+      <table>
+        <tbody>
+          <th> Atividade 1 </th>
+          <th> Moedas atividade 1 </th>
+          <th> Moedas atividade 2 </th>
+          <th> Atividade 2 </th>
+          <tr *ngFor="let item of listnumero3">
+
+            <td style="width:30%">{{item.atividade1}}</td>
+            <td>
+              {{item.moedasatividade1}}
+              <mat-slider thumbLabel (change)="updateAtividade1ListNumero3($event, item.id)"
+                         [displayWith]="formatLabel"
+                         tickInterval="1000"
+                         min="0"
+                         max="11"
+                         value="{{item.moedasatividade1}}"
+                         [vertical]="false">
+                        </mat-slider>
+             </td>
+
+             <td>
+              {{item.moedasatividade2}}
+              <mat-slider thumbLabel (change)="updateAtividade2ListNumero3($event, item.id)"
+                         [displayWith]="formatLabel"
+                         tickInterval="1000"
+                         min="0"
+                         max="11"
+                         value="{{item.moedasatividade2}}"
+                         [vertical]="false">
+                        </mat-slider>
+             </td>
+
+             <td style="width:30%">{{item.atividade2}}</td>
+
+          </tr>
+        </tbody>
+      </table>
+
+      <div>
+        <div class="form-row"  style="margin-top: 20px;">
+          <div class="form-group col-md-6" >
+              <button mat-button matStepperPrevious mat-raised-button color="accent">Anterior</button>
+              <button style="margin-left: 5px;" mat-button matStepperNext mat-raised-button color="primary">Próxima</button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </mat-step>
+
+</div>
+
+
+
+
+
+
+
+<div class="col-md-12">
+  <mat-step [stepControl]="questao4FormGroup">
+    <form [formGroup]="questao4FormGroup">
+      <ng-template matStepLabel></ng-template>
+
+      <mat-toolbar-row style="font-size:1.0rem; color:black">
+        <span>Abaixo estão listados benefícios que se pode ter com hábitos saudáveis. </span>
+      </mat-toolbar-row>
+
+      <table>
+      <tbody>
+      <th>Benefícios</th>
+      <th>Quantas moedas pagaria para ter esse benefício?
+        Em cada um você poderá pagar até 11 moedas.</th>
+
+      <tr *ngFor="let item of listnumero4">
+
+      <td style="width:50%">{{item.beneficio}}</td>
+
+      <td style="width:50%">
+              {{item.moedas}}
+        <mat-slider thumbLabel (change)="updateListNumero4($event, item.id)"
+                         [displayWith]="formatLabel"
+                         tickInterval="1000"
+                         min="0"
+                         max="11"
+                         value="{{item.moedas}}"
+                         [vertical]="false">
+                        </mat-slider>
+       </td>
+
+          </tr>
+        </tbody>
+      </table>
+
+      <div>
+        <div class="form-row"  style="margin-top: 20px;">
+          <div class="form-group col-md-6" >
+              <button mat-button matStepperPrevious mat-raised-button color="accent">Anterior</button>
+              <button style="margin-left: 5px;" mat-button matStepperNext mat-raised-button color="primary">Próxima</button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </mat-step>
+
+</div>
+
+
+
+
+
+<div class="col-md-12">
+  <mat-step [stepControl]="questao5FormGroup">
+    <form [formGroup]="questao5FormGroup">
+      <ng-template matStepLabel></ng-template>
+
+      <mat-toolbar-row style="font-size:1.0rem; color:black">
+        <span>Abaixo estão listados benefícios que se pode ter com hábitos saudáveis.</span>
+      </mat-toolbar-row>
+
+      <mat-toolbar-row style="font-size:1.0rem; color:black">
+        <span>Quantos dias por semana você faria atividade física para ter esse benefício?
+          Por quanto tempo em cada dia?</span>
+      </mat-toolbar-row>
+
+      <table>
+      <tbody>
+      <th>Benefício</th>
+      <th>Quantos dias</th>
+      <th>Quanto tempo</th>
+
+      <tr *ngFor="let item of listnumero5">
+
+              <td style="width:50%">{{item.beneficio}}</td>
+
+              <td style="width:25%">
+
+                <mat-form-field style="width:50%">
+                    <input type="number" matInput placeholder="Dias na semana :" formControlName="questao5Ctrl" [(ngModel)]="item.dias">
+                </mat-form-field>
+
+              </td>
+
+              <td style="width:25%">
+
+              <mat-form-field style="width:50%">
+                <input type="number" matInput placeholder="Minutos por dia :" formControlName="questao5Ctrl" [(ngModel)]="item.minutos">
+              </mat-form-field>
+
+          </tr>
+        </tbody>
+      </table>
+
+      <div>
+        <div class="form-row"  style="margin-top: 20px;">
+          <div class="form-group col-md-6" >
+              <button mat-button matStepperPrevious mat-raised-button color="accent">Anterior</button>
+              <button style="margin-left: 5px;" mat-button matStepperNext mat-raised-button color="primary">Próxima</button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </mat-step>
+
+</div>
+
+
+
+<div class="col-md-12">
+  <mat-step [stepControl]="questao6FormGroup">
+    <form [formGroup]="questao6FormGroup">
+      <ng-template matStepLabel></ng-template>
+
+      <mat-toolbar-row style="font-size:1.0rem; color:black">
+        <span>Abaixo temos uma lista de prejuízos à saúde que podemos ter com hábitos não saudáveis.</span>
+      </mat-toolbar-row>
+
+      <table>
+      <tbody>
+      <th>Prejuízos</th>
+      <th>Quantas moedas pagaria para evitar esse prejuízo?
+        Em cada um você poderá pagar até 11 moedas.</th>
+
+      <tr *ngFor="let item of listnumero6">
+
+      <td style="width:50%">{{item.prejuizo}}</td>
+
+      <td style="width:50%">
+              {{item.moedas}}
+        <mat-slider thumbLabel (change)="updateListNumero6($event, item.id)"
+                         [displayWith]="formatLabel"
+                         tickInterval="1000"
+                         min="0"
+                         max="11"
+                         value="{{item.moedas}}"
+                         [vertical]="false">
+                        </mat-slider>
+       </td>
+
+          </tr>
+        </tbody>
+      </table>
+
+      <div>
+        <div class="form-row"  style="margin-top: 20px;">
+          <div class="form-group col-md-6" >
+              <button mat-button matStepperPrevious mat-raised-button color="accent">Anterior</button>
+              <button style="margin-left: 5px;" mat-button matStepperNext mat-raised-button color="primary">Próxima</button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </mat-step>
+
+</div>
+
+
+
+<div class="col-md-12">
+  <mat-step [stepControl]="questao7FormGroup">
+    <form [formGroup]="questao7FormGroup">
+      <ng-template matStepLabel></ng-template>
+
+      <mat-toolbar-row style="font-size:1.0rem; color:black">
+        <span>Abaixo temos uma lista de prejuízos à saúde que podemos ter com hábitos não saudáveis.</span>
+      </mat-toolbar-row>
+
+      <mat-toolbar-row style="font-size:1.0rem; color:black">
+        <span>Quantos dias por semana você faria atividade física para evitar esse prejuízo?
+          Por quanto tempo em cada dia?</span>
+      </mat-toolbar-row>
+
+      <table>
+      <tbody>
+      <th>Prejuízo</th>
+      <th>Quantos dias</th>
+      <th>Quanto tempo</th>
+
+      <tr *ngFor="let item of listnumero7">
+
+              <td style="width:50%">{{item.prejuizo}}</td>
+
+              <td style="width:25%">
+
+                <mat-form-field style="width:50%">
+                    <input type="number" matInput placeholder="Dias na semana :" formControlName="questao7Ctrl" [(ngModel)]="item.dias">
+                </mat-form-field>
+
+              </td>
+
+              <td style="width:25%">
+
+              <mat-form-field style="width:50%">
+                <input type="number" matInput placeholder="Minutos por dia :" formControlName="questao7Ctrl" [(ngModel)]="item.minutos">
+              </mat-form-field>
+
+          </tr>
+        </tbody>
+      </table>
+
+      <div>
+        <div class="form-row"  style="margin-top: 20px;">
+          <div class="form-group col-md-6" >
+              <button mat-button matStepperPrevious mat-raised-button color="accent">Anterior</button>
+              <button style="margin-left: 5px;" mat-button matStepperNext mat-raised-button color="primary">Próxima</button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </mat-step>
+
+</div>
+
+
+<div class="col-md-12">
+  <mat-step [stepControl]="questao8FormGroup">
+    <form [formGroup]="questao8FormGroup">
+      <ng-template matStepLabel></ng-template>
+
+      <mat-toolbar-row style="font-size:1.0rem; color:black">
+        <span>Você considera a prática de atividade física uma atividade prazerosa?</span>
+      </mat-toolbar-row>
+
+      <mat-card>
+        <mat-card-content>
+
+          <div>
+            <div class="form-row"  style="margin-top: 20px;">
+              <div class="form-group col-md-6" >
+                  <button (click)="selecionarQuestao8Sim()" [disabled]="botaosim" mat-button mat-raised-button color="accent">Sim</button>
+                  <button (click)="selecionarQuestao8Nao()" [disabled]="botaonao"style="margin-left: 5px;" mat-button mat-raised-button color="primary">Não</button>
+              </div>
+            </div>
+          </div>
+
+        </mat-card-content>
+      </mat-card>
+
+      <div>
+        <div class="form-row"  style="margin-top: 20px;">
+          <div class="form-group col-md-6" >
+              <button mat-button matStepperPrevious mat-raised-button color="accent">Anterior</button>
+              <button style="margin-left: 5px;" mat-button matStepperNext mat-raised-button color="primary">Próxima</button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </mat-step>
+
+</div>
+
+
+
+<div class="col-md-12">
+  <mat-step [stepControl]="questao9FormGroup">
+    <form [formGroup]="questao9FormGroup">
+      <ng-template matStepLabel></ng-template>
+
+      <mat-toolbar-row style="font-size:1.0rem; color:black">
+        <span>Se pudesse escolher qualquer atividade física para praticar no lazer (POR PRAZER) (pense na atividade que mais te traz satisfação ao fazer) nos dias e horários de sua preferência.
+          </span>
+      </mat-toolbar-row>
+
+      <mat-card>
+        <mat-card-content>
+
+          <mat-form-field style="width:30%">
+            <input type="number" matInput placeholder="Quanto pagaria por essa atividade de 0 a 11 moedas?" formControlName="questao9Ctrl">
+          </mat-form-field>
+
+        </mat-card-content>
+      </mat-card>
+
+      <mat-toolbar-row style="font-size:1.0rem; color:black">
+        <span>Se tivesse tempo disponível, faria essa atividade por quantos dias da semana?</span>
+      </mat-toolbar-row>
+
+      <mat-card>
+        <mat-card-content>
+
+          <mat-form-field style="width:30%">
+            <input type="number" matInput placeholder="Quantos dias na semana ?" formControlName="questao9Ctrl">
+          </mat-form-field>
+
+        </mat-card-content>
+      </mat-card>
+
+      <mat-toolbar-row style="font-size:1.0rem; color:black">
+        <span>Por quanto tempo faria essa atividade?</span>
+      </mat-toolbar-row>
+
+      <mat-card>
+        <mat-card-content>
+
+          <mat-form-field style="width:30%">
+            <input type="number" matInput placeholder="Quantos minutos por dia ?" formControlName="questao9Ctrl">
+          </mat-form-field>
+
+        </mat-card-content>
+      </mat-card>
+
+      <div>
+        <div class="form-row"  style="margin-top: 20px;">
+          <div class="form-group col-md-6" >
+              <button mat-button matStepperPrevious mat-raised-button color="accent">Anterior</button>
+              <button (click)="finalizar()" style="margin-left: 5px;" mat-button matStepperNext mat-raised-button color="primary">Finalizar</button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </mat-step>
+
+  <mat-step>
+    <mat-toolbar-row style="font-size:1.8rem; color:black">
+      <span>Obrigado pela sua participação!</span>
+    </mat-toolbar-row>
+   </mat-step>
+
+
+</div>
+
+</mat-vertical-stepper>
+</div>
